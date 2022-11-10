@@ -34,7 +34,7 @@ RUN apt-get update && apt install -y \
     wget && rm -rf /var/lib/apt/lists/*
 
 # Clone the OSRM backend repository, compile, build, install libOSRM
-RUN git clone https://github.com/Project-OSRM/osrm-backend.git --branch 5.26 && \
+RUN git clone --depth 1 --branch v5.26.0 https://github.com/Project-OSRM/osrm-backend.git && \
     cd osrm-backend && mkdir -p build && cd build && \
     cmake .. -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=ON && \
     cmake --build . && cmake --build . --target install && cp -r /osrm-backend/profiles/* /opt/ && rm -rf /osrm-backend
